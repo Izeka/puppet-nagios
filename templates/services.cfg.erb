@@ -1,0 +1,8 @@
+define service{
+        use                             generic-service         ; Name of service template to use
+        host_name                  <%= @host_name %>
+        hostgroupname                  <%= @hostgroup %>
+        service_description             <%= @description %>
+        check_command                   <%= @command %>  
+   }
+       #
