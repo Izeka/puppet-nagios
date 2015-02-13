@@ -1,7 +1,5 @@
 # Manage the Nagios monitoring service
 class nagios::monitor {
-include nagios::services::linuxservers
-#include pnp4nagios
 include nagios::pnp4nagios
 
 # Manage the packages
@@ -15,13 +13,7 @@ include nagios::pnp4nagios
 		ensure => running,
 		hasstatus => true,
 		enable  => true,
-		require => [ Package['nagios'], Package['nagios-plugins'] ],
-	}
-	service { 'httpd':
-		ensure => running,
-		hasstatus => true,
-		enable  => true,
-		require => [ Package['nagios'], Package['nagios-plugins'] ],
+		require => Package['nagios'],
 	}
 
 # Set nagios.cfg permissions
@@ -31,7 +23,7 @@ include nagios::pnp4nagios
                         group => 'nagios',
                         mode => '0640',
 			purge => true,
-                        require => [ Package['nagios'], Package['nagios-plugins'] ],
+                        require => [ Package['nagios'],
                         notify => Service['nagios'],
             }	
 # Set default commands.cfg
@@ -50,6 +42,7 @@ include nagios::pnp4nagios
 	    purge => true,
 	    notify => Service["nagios"]
 	}
+
 # Make nagios configuration files readeables
 
 	exec{'make_nagios_config_readable':
@@ -58,11 +51,11 @@ include nagios::pnp4nagios
 		notify => Service['nagios']
 	}
 # Remove old configurations
-	exec { "rm-nag-conf-hosts":
+	exec { "remove_nagios_config":
 	   command => '/bin/rm -f  /etc/nagios/conf.d/*',
 	}
 
-        Nagios_host <<||>> { require => Exec['rm-nag-conf-hosts'], notify  => Exec['make_nagios_config_readable'] }
-        Nagios_hostgroup <<||>> { require => Exec['rm-nag-conf-hosts'],notify  => Exec['make_nagios_config_readable']}
-        Nagios_service <<||>> { require => Exec['rm-nag-conf-hosts'], notify  => Exec['make_nagios_config_readable'] }
+        Nagios_host <<||>> { require => Exec['remove_nagios_config'], notify  => Exec['make_nagios_config_readable'] }
+        Nagios_hostgroup <<||>> { require => Exec['remove_nagios_config'],notify  => Exec['make_nagios_config_readable']}
+        Nagios_service <<||>> { require => Exec['remove_nagios_config'], notify  => Exec['make_nagios_config_readable'] }
 }

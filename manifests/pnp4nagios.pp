@@ -1,6 +1,5 @@
-class nagios::pnp4nagios(
-$src_target='/usr/src',
-){
+class nagios::pnp4nagios
+{
   package {'pnp4nagios':
 	ensure => installed,
 	allow_virtual => false
@@ -9,7 +8,7 @@ $src_target='/usr/src',
 	ensure => running,
 	enable => true,
 	 }
-   file {"/usr/share/nagios/html/ssi/status-header.ssi":
+  file {"/usr/share/nagios/html/ssi/status-header.ssi":
 	source => "puppet:///modules/nagios/status-header.ssi",
 	owner => 'nagios',
         group => 'nagios',
@@ -18,7 +17,7 @@ $src_target='/usr/src',
         notify => Service['nagios'],
 	}
 
-   file{'/etc/httpd/conf.d/pnp4nagios.conf':
+  file{'/etc/httpd/conf.d/pnp4nagios.conf':
         source => 'puppet:///modules/nagios/default-pnp4nagios.conf',
         owner => 'nagios',
         group => 'nagios',
@@ -27,11 +26,11 @@ $src_target='/usr/src',
         require => [ Package['nagios'], Package['pnp4nagios'] ],
 	notify => Service['httpd'],
        }
-   file{'/usr/local/pnp4nagios/share/install.php':
+  file{'/usr/local/pnp4nagios/share/install.php':
 	ensure => absent,
         require => Package['pnp4nagios'],
        }
-   file{'/etc/nagios/conf.d/pnp4nagios_template.cfg':
+  file{'/etc/nagios/conf.d/pnp4nagios_template.cfg':
                         source => 'puppet:///modules/nagios/pnp4nagios_template.cfg',
                         owner => 'nagios',
                         group => 'nagios',
