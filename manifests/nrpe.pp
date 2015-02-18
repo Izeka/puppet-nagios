@@ -1,17 +1,9 @@
-class nagios::nrpe{
+class nagios::nrpe (
+ $nrpe_packages = $nagios::params::nrpe_packages,
+ $nrpe_service = $nagios::params::nrpe_service,
+ $nrpe_config_file = $nagios::params::nrpe_config_file,
 
-case $::operatingsystem {
-    'RedHat', 'CentOS': {
- 	$nrpe_packages=["nrpe","nagios-plugins-nrpe","nagios-plugins-all"] 
-	$nrpe_service='nrpe'
-        $nrpe_config_file='puppet:///modules/nagios/centos6-nrpe.cfg'
-    }
-    'ubuntu','debian':{
-	$nrpe_packages=["nagios-plugins","nagios-nrpe-plugin","nagios-nrpe-server"]
-	$nrpe_service='nagios-nrpe-server'
-	$nrpe_config_file='puppet:///modules/nagios/debian-nrpe.cfg'
-	}
-    }
+) inherits nagios::params {
 
 package {$nrpe_packages:
          ensure => present,
@@ -28,4 +20,5 @@ file {'/etc/nagios/nrpe.cfg':
       require => Package[$nrpe_packages],
       notify => Service[$nrpe_service],	
      }
+
 }
