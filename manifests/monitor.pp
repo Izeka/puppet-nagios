@@ -1,6 +1,6 @@
 # Manage the Nagios monitoring service
 class nagios::monitor(
- $nagios_packages = $nagios::params::nagios_packages,
+ $nagios_packages = $nagios::params::nagios_packages, 
  $nagios_service = $nagios::params::nagios_service,
  $nagios_config_file = $nagios::params::nagios_config_file,
  $nagios_config_folder = $nagios::params::nagios_config_folder,

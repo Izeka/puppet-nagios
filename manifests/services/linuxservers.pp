@@ -1,8 +1,8 @@
 class nagios::services::linuxservers {  
 
  nagios::hostgroup{'linux':
-	name =>'linux-servers',
-	alias => 'Linux Servers' 
+	hostgroup_name =>'linux-servers',
+	hostgroup_alias => 'Linux Servers' 
  }
 
  nagios::services::base {'PING':
