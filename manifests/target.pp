@@ -5,18 +5,18 @@ class nagios::target(
  $host_use = $nagios::params::host_use,
  $host_group_name = $nagios::params::host_group_name,
  $host_target = $nagios::params::host_target,
-)
-{
-	@@nagios_host { $host_name:
+){
+	 @@nagios_host { $host_name:
 		ensure => present,
 		alias => $host_name,
 		address => $host_address,
 		use => $host_use,
 		target => $host_target,
-	}
-	if ( $host_group_name != 'absent'){
+	
+	 }
+	 if ( $host_group_name != 'absent'){
 	   Nagios_host[$host_name] { hostgroups => $host_group_name }
-	}
+	 }
 
 	
 }
