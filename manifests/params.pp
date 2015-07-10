@@ -16,6 +16,8 @@ class nagios::params{
 	$nagios_commands_file = "/etc/nagios/objects/commands.cfg"
         $nagios_config_folder = "/etc/nagios/conf.d"
 	$host_target =  '/etc/nagios/conf.d/linux_servers.cfg'
+        $default_nagios_config="default-nagios.cfg"
+	$default_nagios_commands="default-nagios.cfg"
 
 case $::operatingsystem {
 
