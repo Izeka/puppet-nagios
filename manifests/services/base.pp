@@ -18,7 +18,7 @@ $host_name=false,
 	  default => $hostgroup_name
 	},
 	host_name => $host_name ? {
-	#  false => undef,
+	  false => undef,
 	  default => $host_name,
 	}
       }

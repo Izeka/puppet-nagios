@@ -10,7 +10,7 @@ class nagios::params{
         $hostgroup_target ="/etc/nagios/conf.d/hostgroups.cfg"
 
 	#nagios monitor parameters
-	$nagios_packages = ["nagios","nagios-plugins-all"]
+	$nagios_packages = ["nagios"]
 	$nagios_service = "nagios"
 	$nagios_config_file = "/etc/nagios/nagios.cfg"
 	$nagios_commands_file = "/etc/nagios/objects/commands.cfg"
@@ -23,7 +23,7 @@ case $::operatingsystem {
 
 	#nrpe parameters
 	$nrpe_server_address = hiera('nrpe_server_address')
- 	$nrpe_packages = ["nrpe","nagios-plugins-nrpe","nagios-plugins"] 
+ 	$nrpe_packages = ["nrpe","nagios-plugins-nrpe","nagios-plugins-all"]
 	$nrpe_service = "nrpe"
         $nrpe_config_file = "/etc/nagios/nrpe.cfg"
         $nrpe_config_template = "nagios/centos-nrpe_config.erb"

@@ -5,7 +5,7 @@ class nagios::target(
  $host_use = $nagios::params::host_use,
  $host_group_name = $nagios::params::host_group_name,
  $host_target = $nagios::params::host_target,
-){
+) inherits nagios::params {
 	 @@nagios_host { $host_name:
 		ensure => present,
 		alias => $host_name,
