@@ -4,7 +4,7 @@ class nagios::monitor(
  $nagios_service = $nagios::params::nagios_service,
  $nagios_config_file = $nagios::params::nagios_config_file,
  $nagios_config_folder = $nagios::params::nagios_config_folder,
- $default_nagios_config = $nagios::params::default_nagios_config
+ $default_nagios_config = $nagios::params::default_nagios_config,
  $default_nagios_commands= $nagios::params::default_nagios_commands
 ) inherits nagios::params {
 
@@ -24,7 +24,7 @@ class nagios::monitor(
 
 # Set nagios.cfg permissions
 	file{$nagios_config_file:
-                        source => 'puppet:///modules/nagios/default-nagios.cfg',
+                        source => "puppet:///modules/nagios/${default_nagios_config}",
                         owner => 'nagios',
                         group => 'nagios',
                         mode => '0640',
@@ -34,7 +34,7 @@ class nagios::monitor(
             }	
 # Set default commands.cfg
 	file{$nagios_commands_file:
-                        source => 'puppet:///modules/nagios/default-commands.cfg',
+                        source => "puppet:///modules/nagios/${default_nagios_commands}",
                         owner => 'nagios',
                         group => 'nagios',
                         mode => '0640',
