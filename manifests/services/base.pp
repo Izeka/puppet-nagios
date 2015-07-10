@@ -3,6 +3,7 @@ $command,
 $description,
 $hostgroup_name= false,
 $host_name=false,
+$nagios_services_file= $nagios::paramas::nagios_services_file
 ){
 
 @@nagios_service { "$description":
@@ -10,7 +11,7 @@ $host_name=false,
 	use => 'generic-service,srv-pnp',
 	notification_period => '24x7',
 	service_description => $description,
-        target => "/etc/nagios/conf.d/services.cfg",
+        target => $nagios_services_file,
         max_check_attempts => 3,
 	hostgroup_name => $hostgroup_name ? {
    	  false => undef,
