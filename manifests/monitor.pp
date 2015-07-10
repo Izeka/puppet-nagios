@@ -4,6 +4,8 @@ class nagios::monitor(
  $nagios_service = $nagios::params::nagios_service,
  $nagios_config_file = $nagios::params::nagios_config_file,
  $nagios_config_folder = $nagios::params::nagios_config_folder,
+ $default_nagios_config = $nagios::params::default_nagios_config
+ $default_nagios_commands= $nagios::params::default_nagios_commands
 ) inherits nagios::params {
 
 # Manage the packages
