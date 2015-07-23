@@ -17,8 +17,10 @@ class nagios::params{
         $nagios_config_folder = "/etc/nagios/conf.d"
 	$host_target =  '/etc/nagios/conf.d/linux_servers.cfg'
         $default_nagios_config="default-nagios.cfg"
-	$default_nagios_commands="default-nagios.cfg"
-
+	$default_nagios_commands="default-commands.cfg"
+	
+	#Services params
+	$nagios_services_file= "/etc/nagios/conf.d/services.cfg"
 case $::operatingsystem {
 
     "RedHat", "CentOS": {
