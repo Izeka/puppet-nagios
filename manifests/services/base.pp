@@ -3,8 +3,8 @@ $command,
 $description,
 $hostgroup_name= false,
 $host_name=false,
-$nagios_services_file= $nagios::paramas::nagios_services_file
-){
+$nagios_services_file= $nagios::params::nagios_services_file 
+) {
 
 @@nagios_service { "$description":
 	check_command => $command,
