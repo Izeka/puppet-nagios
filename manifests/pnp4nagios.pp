@@ -23,7 +23,7 @@ class nagios::pnp4nagios
         source => 'puppet:///modules/nagios/default-pnp4nagios.conf',
         owner => 'nagios',
         group => 'nagios',
-        mode => '0640',
+        mode => '0644',
  	purge => true,
         require => [ Package['nagios'], Package['pnp4nagios'] ],
 	notify => Service['httpd'],
@@ -34,7 +34,7 @@ class nagios::pnp4nagios
         require => Package['pnp4nagios'],
        }
 
-  file{'/etc/nagios/conf.d/pnp4nagios_template.cfg':
+  file{'/etc/nagios/conf.d/pnp4nagios.cfg':
                         source => 'puppet:///modules/nagios/pnp4nagios_template.cfg',
                         owner => 'nagios',
                         group => 'nagios',
