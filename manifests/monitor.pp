@@ -1,4 +1,4 @@
-# Manage the Nagios monitoring service
+# Manage the Nagios monitoring service:
 class nagios::monitor(
  $nagios_packages = $nagios::params::nagios_packages, 
  $nagios_service = $nagios::params::nagios_service,
@@ -30,7 +30,7 @@ class nagios::monitor(
                         mode => '0640',
 			purge => true,
                         require => Package[$nagios_packages],
-                        notify => Service[$nagios_service],
+			notify => Service[$nagios_service]
             }	
 
 # Set default commands.cfg
@@ -41,7 +41,7 @@ class nagios::monitor(
                         mode => '0640',
 			purge => true,
  		        require => Package[$nagios_packages],
-                        notify => Service[$nagios_service],
+			notify => Service[$nagios_service]
             }
 
 # Remove old configurations
@@ -61,7 +61,7 @@ class nagios::monitor(
 	    notify => Service[$nagios_service]
 	}
 
-        Nagios_host <<||>> { require => Exec['remove_nagios_config'], notify  => Exec['make_nagios_config_readable'] }
+        Nagios_host <<||>> { require => Exec['remove_nagios_config'], notify  => Exec['make_nagios_config_readable']}
         Nagios_hostgroup <<||>> { require => Exec['remove_nagios_config'],notify  => Exec['make_nagios_config_readable']}
-        Nagios_service <<||>> { require => Exec['remove_nagios_config'], notify  => Exec['make_nagios_config_readable'] }
+        Nagios_service <<||>> { require => Exec['remove_nagios_config'], notify  => Exec['make_nagios_config_readable']}
 }
