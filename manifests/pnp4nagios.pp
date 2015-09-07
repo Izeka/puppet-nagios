@@ -10,8 +10,8 @@ class nagios::pnp4nagios
 	enable => true,
 	 }
 
-  file {"/usr/share/nagios/html/ssi/status-header.ssi":
-	source => "puppet:///modules/nagios/status-header.ssi",
+  file {'/usr/share/nagios/html/ssi/status-header.ssi':
+	source => 'puppet:///modules/nagios/status-header.ssi',
 	owner => 'nagios',
         group => 'nagios',
         mode => '0640',
